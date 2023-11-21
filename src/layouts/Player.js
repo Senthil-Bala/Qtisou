@@ -9,7 +9,7 @@ import usePlayer from '../hooks/usePlayer';
 
 function Player() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { pause, duration, sound }] = useSound(musicFile);
+  const [play, { pause, stop, duration, sound }] = useSound(musicFile);
   const [time, setTime] = useState({
     min: '',
     sec: '',
@@ -69,7 +69,13 @@ function Player() {
 
   useEffect(() => {
     if (title !== 'Memories') {
-      playingButton();
+      if (isPlaying) {
+        stop();
+        setIsPlaying(true);
+        play();
+      } else {
+        playingButton();
+      }
     }
   }, [title]);
 
