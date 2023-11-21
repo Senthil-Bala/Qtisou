@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import useSound from 'use-sound';
 import musicFile from '../Assets/memories.mp3';
-import albumArt from '../Assets/images/album-Img.jpeg';
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
 import { BiSkipNext, BiSkipPrevious } from 'react-icons/bi';
 import { IconContext } from 'react-icons';
@@ -20,16 +19,15 @@ function Player() {
     sec: '',
   });
 
-  const [seconds, setSeconds] = useState();
+  const [seconds, setSeconds] = useState(0);
 
-  const { title, album, artist, cover } = usePlayer(state => ({
+  const { title, artists, cover } = usePlayer(state => ({
     title: state.title,
-    album: state.album,
-    artists: state.artist,
+    artists: state.artists,
     cover: state.cover,
   }));
 
-  console.log('***Title');
+  // console.log(album, '***Title');
 
   useEffect(() => {
     if (duration) {
@@ -57,6 +55,7 @@ function Player() {
     }, 1000);
     return () => clearInterval(interval);
   }, [sound]);
+  // useEffect(() => {}, []);
 
   const playingButton = () => {
     if (isPlaying) {
@@ -67,24 +66,30 @@ function Player() {
       setIsPlaying(true);
     }
   };
+
+  useEffect(() => {
+    if (title !== 'Memories') {
+      playingButton();
+    }
+  }, [title]);
+
   return (
     <div className="flex  justify-center  w-full px-4 py-2 ">
       <div className="flex h-20 w-3/12  ">
         <img
-          src={albumArt}
+          src={cover}
           alt="album"
           className="h-28 md:h-20 md:mr-5 w-20 rounded-lg"
         />
-        <div className="hidden md:flex flex-col">
-          <h1>Song: Memories</h1>
-          <h2>Album: Xyz</h2>
-          <h3>Artist: Maroon 5</h3>
+        <div className="hidden md:flex flex-col gap-2">
+          <h1>Song: {title}</h1>
+          <h3>Artist: {artists}</h3>
         </div>
       </div>
       <div className="flex flex-col justify-center items-center w-9/12 px-4 md:px-8">
         <div className="flex flex-col justify-center items-center md:hidden text-sm">
-          <h3>Memories</h3>
-          <div>by Maroon 5</div>
+          <h3>{title}</h3>
+          <div>by {artists}</div>
         </div>
         <div className="flex flex-col justify-center items-center w-full">
           <div className=" flex justify-between w-full text-sm">

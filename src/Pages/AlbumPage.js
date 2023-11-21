@@ -30,7 +30,7 @@ function AlbumPage() {
     loading: loading,
   });
 
-  console.log(songsPagination);
+  // console.log(songsPagination);
   // console.log(currentPage, '***currentPage');
 
   return (
