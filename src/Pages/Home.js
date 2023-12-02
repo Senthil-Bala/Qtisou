@@ -1,4 +1,4 @@
-import NavBar from '../layouts/NavBar';
+import Navbar from "../layouts/Navbars/Navbar"
 import HeroSection from '../layouts/HeroSection';
 import AlbumSection from '../layouts/AlbumSection';
 import SongSection from '../layouts/SongSection';
@@ -7,7 +7,7 @@ import Player from '../layouts/Player';
 function Home() {
   return (
     <div className="overflow-hidden select-none">
-      <NavBar />
+      <Navbar />
       <div className="bg-black w-screen text-white poppins">
         <HeroSection />
         <AlbumSection
